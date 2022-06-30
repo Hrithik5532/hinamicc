@@ -1,0 +1,182 @@
+{% include 'html/base.html' %} {% block content %} {%block head %}
+<title>Himani'sCC || Blogs </title>{% endblock head %}
+
+
+<style>
+    .blog-img {
+        width: 100%;
+        height: 180px;
+    }
+</style>
+
+
+
+<!-- Hero Section -->
+
+<div class="bg-primary bg-img-hero banner-everywhere banner-blog" style="background-image: url(/assets/img/Home/Other/p1.jpg);">
+    <div class="container space-2">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="text-left mx-lg-auto">
+                    <span class="badge badge-soft-light bordered-element-light font-size-1 py-3 px-4 mb-3">Blogs</span>
+                    <h1 class="text-white mb-0">Read our latest Blogs</h1>
+                    <p class="text-white w-lg-65">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima dolore porro inventore dolore nditiis!</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="">
+                    <div class="mb-3">
+                        <h3 class="text-white">Filter Search</h3>
+                    </div>
+                    <form action="{% url 'blogs'%}">
+                        <div class="filter-search">
+
+                            <div class="filter-gap filter-search-Cat">
+                                <select class="bordered-element-light form-control custom-select text-muted" name='categoryName' data-msg="Please select country.">
+                                    <option value="">Select Catogory</option>
+                                    {% for cat in categories %}
+                                    <option value="{{cat}}">{{cat}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+
+                            <div class="filter-gap filter-search-Year">
+                                <select class="bordered-element-light form-control custom-select text-muted" name='year' data-msg="Please select country.">
+                                    <option value="">Select Year</option>
+                                    {% for yr in post_year %}
+                                    <option value="{{yr}}">{{yr}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+
+                            <button class="w-100 btn bordered-element-light himani-btn" type="submit">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="">
+                <div class="mb-3">
+                    <h3 class="text-white">Tags</h3>
+                </div>
+                <form action="{% url 'blogs'%}">
+                    {% for tag in tags %}
+                    <button class="btn btn-xs btn-soft-secondary mb-1 bordered-element-light bg-white" name="tag" type="submit" value="{{tag.slug}}">{{tag}}</button> {% endfor %}
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Hero Section -->
+
+
+
+
+
+
+
+
+
+
+<!-- Articles Section -->
+<div class="container space-2">
+    <!-- Title -->
+    <div class=" mx-md-auto mb-5 mb-md-9">
+        <h2 class="h1">Best Contents Daily</h2>
+        <p>We've helped some great companies brand, design and get to market.</p>
+    </div>
+    <!-- End Title -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row mx-n2 mb-5 mb-md-9">
+
+
+                {% for blog in blogs %}
+
+                <div class="col-sm-6 col-lg-3 px-2 mb-3 mb-lg-0">
+                    <!-- Card -->
+                    <a class="card h-100 transition-3d-hover" href="{% url 'blog' blog.title %}">
+                        <img src="../../media/{{blog.thumbnail}}" class="blog-img" alt="Image Description">
+                        <div class="card-body">
+                            <span class="d-block small font-weight-bold text-cap mb-2">{{blog.category}}</span>
+                            <h5 class="mb-0">{{blog.title}}</h5>
+
+                        </div>
+                    </a>
+                    <!-- End Card -->
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+
+            <!-- Pagination Code starts from Here -->
+
+
+
+            <nav aria-label="Page navigation example hide-mobile">
+                {% if blogs.has_other_pages %}
+                <ul class="pagination">
+                    {% if blogs.has_previous %}
+                    <li class="previous page-item"><a href="?page={{ blogs.previous_page_number }}"><i
+                                class="fa fa-chevron-left"> </i></a></li>
+                    {% else %}
+                    <li class="disabled page-item"><i class=""></i></li>
+                    {% endif %} {% for i in blogs.paginator.page_range %} {% if blogs.number == i %}
+                    <li class="active-slide page-item"><span>{{ i }} <span class="sr-only">(current)</span></span>
+                    </li>
+                    {% else %}
+                    <li class="next page-item"><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %} {% endfor %} {% if blogs.has_next %}
+                    <li class="next-slide page-item"><a href="?page={{ posts.next_page_number }}"><i
+                                class="fa fa-chevron-right"></i></a></li>
+                    {% else %}
+                    <li class="disabled page-item"><i class="bi bi-caret-right-fill"></i></li>
+                    {% endif %}
+                </ul>
+                {% endif %}
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="space-bottom-3" style="background-color: #f7f7f7;">
+    <div class="container space-1">
+        <div class="w-md-100 text-center mx-auto mb-4 mt-4">
+            <h2 class="h1">Stay in the know</h2>
+            <p>Subscribe to our amazing Blogs</p>
+        </div>
+
+        <div class="w-lg-40 mx-lg-auto">
+            <form class="js-validate" action="{% url 'subscribe' %}">
+                <div class="form-row">
+                    <div class="col-sm col-md-6 col-lg mb-2 mt-0">
+                        <div class="js-form-message">
+                            <label class="sr-only" for="signupSrEmailExample1">Your email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control bordered-element-light" style="background-color: #f7f7f7; height: 51px;" name="email" placeholder="Your email " required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-auto">
+                        <button type="submit" class="btn btn-primary btn-block bordered-element-light">Subscribe</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

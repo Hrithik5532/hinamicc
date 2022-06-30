@@ -1,0 +1,176 @@
+{% include 'html/base.html' %} {% block content %} {%block head %}
+<title>Himani'sCC || Carrier </title>{% endblock head %}
+
+
+<style>
+    .rotate-cardn-5 {
+        transform: rotate(-5deg);
+    }
+    
+    @media(max-width:552px) {
+        .rotate-cardn-5 {
+            transform: rotate(0deg);
+        }
+    }
+</style>
+
+
+<!-- Signup Form Section -->
+<div class="align-items-center" style="background-image: url(/assets/img/Carrier/c2.jpg); width: 100%; height: 70vh; background-size:cover;">
+    <div class="container-xl container-fluid space-3">
+        <div class="row justify-content-lg-between align-items-lg-center rotate-cardn-5">
+            <div class="col-md-5 mb-lg-0">
+                <div class="card h-100 p-4">
+                    <div class="m-1" style="border: 1px solid rgba(190, 190, 190, 0.344); padding: 20px ;">
+                        <h1 class="h1">Work with us</h1>
+                        <p style="color: black;">At himanis' CC, We seek hard-working, self starterst to join our family of collabaration and ambitions industry professionals.</p>
+                        <p style="color: black;">Build Your Carrier and the future with us</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="frame ">
+    <div class="container space-top-2 space-bottom-3 ">
+
+        <div class="w-md-100 w-lg-100 mx-md-auto mb-5 mb-md-9 ">
+            <h2>Open Positions</h2>
+            <span class="d-block small font-weight-bold text-cap mb-2 ">Current Job Openings</span>
+        </div>
+
+
+
+        <div class="row ">
+            <div class="col-md-3 ">
+                <div class="border-bottom pb-5 mb-9 ">
+                    <form action="{% url 'blogs'%} ">
+                        <div class="filter-search ">
+                            <div class="filter-gap-2 filter-search-Cat ">
+                                <select class="bordered-element-light form-control custom-select text-muted" name='categoryName' data-msg="Please select country. ">
+                                    <option value=" ">Jobs</option>
+                                    {% for cat in categories %}
+                                    <option value="{{cat}} ">{{cat}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button class="w-100 btn bordered-element-light himani-btn " type="submit ">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9 ">
+                <a class="card card-frame mb-3 job-card " href="#modal" data-toggle="modal" data-target="#exampleModal">
+                    <div class="row align-items-sm-center ">
+                        <span class="col-sm-6 text-dark ">
+                            Graphic Designer
+                        </span>
+                        <span class="col-6 col-sm-3 text-body ">
+                            Mumbai
+                        </span>
+                        <span class="col-6 col-sm-3 text-right" data-toggle="modal" data-target="#exampleModal">
+                            Apply <i class="fas fa-angle-right fa-sm ml-1 "></i>
+                        </span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<div class="modal fade bordered-element-light align-item-center" id="exampleModal" tabindex="-5" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog " role="document ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h5 class="modal-title " id="exampleModalLabel">Let's Connect
+                </h5>
+                <button type="button " class="btn btn-xs btn-icon btn-soft-secondary bordered-element-light " data-dismiss="modal" aria-label="Close">
+                    <svg aria-hidden="true " width="10 " height="10 " viewBox="0 0 18 18 "
+                        xmlns="http://www.w3.org/2000/svg ">
+                        <path fill="currentColor "
+                            d="M11.5,9.5l5-5c0.2-0.2,0.2-0.6-0.1-0.9l-1-1c-0.3-0.3-0.7-0.3-0.9-0.1l-5,5l-5-5C4.3,2.3,3.9,2.4,3.6,2.6l-1,1 C2.4,3.9,2.3,4.3,2.5,4.5l5,5l-5,5c-0.2,0.2-0.2,0.6,0.1,0.9l1,1c0.3,0.3,0.7,0.3,0.9,0.1l5-5l5,5c0.2,0.2,0.6,0.2,0.9-0.1l1-1
+                        c0.3-0.3,0.3-0.7,0.1-0.9L11.5,9.5z " />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <div>
+                    <div>
+                        <div class="media d-block d-sm-flex ">
+                            <div class="media-body media-body-team ">
+                                <form class="js-validates " action="{% url 'home' %} " method="POST ">
+                                    {% csrf_token %}
+                                    <div class="card-body p-4 p-md-7 ">
+                                        <div class="mb-4 ">
+                                            <h3>Fill out the form and we'll be in touch as soon as possible.</h3>
+                                        </div>
+
+                                        <div class="row mx-n2 ">
+                                            <div class="col-sm-6 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.fname}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.email}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.number}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.service}}
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.website}}
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="col-sm-12 px-2 ">
+                                                <div class="js-form-message form-group ">
+                                                    {{contact.comment}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit " class="btn btn-block btn-primary ">Get Quote</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock content %}
