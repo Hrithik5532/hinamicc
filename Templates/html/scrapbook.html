@@ -5,12 +5,16 @@
         margin: 1rem 0;
     }
 </style>
+<div class="js-slide  bg-img-hero space-3 align-items-center" style="height: 80vh;opacity:1; background-image: url(/assets/img/scrapbook/ScrapBook.jpg);">
 
-<div class="bg-primary bg-img-hero banner-everywhere" style="background-image: url(/assets/img/Home/Other/p1.jpg);">
+{% comment %} <div class="bg-primary bg-img-hero banner-everywhere" style="background-image: url(/assets/img/scrapbook/ScrapBook.jpg);"> {% endcomment %}
     <div class="container space-2 space-lg-3">
         <div class="w-lg-65 text-center mx-lg-auto">
-            <span class="badge badge-soft-light bordered-element-light font-size-1 py-3 px-4 mb-3">Scrapbook</span>
-            <h1 class="text-white mb-0">We are streamlining our product portfolio.</h1>
+
+            <span class="badge badge-soft bordered-element py- px-7 mb-3" style="font-size:30px">Scrapbook</span>
+            <h2 class="text mb-0">Updating soon....</h2>
+                <h2 class="text mb-0"> P O R T F O L I O</h2>
+                <h3 class="text mb-0">   We are streamlining our product portfolio.</h3>
         </div>
     </div>
 </div>
@@ -34,15 +38,15 @@
 
 
 <div class="container space-top-0 space-bottom-3">
-    <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
+    {% comment %} <div class="w-md-80 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
         <h2 class="h1">Scrapbook </h2>
         <p>Have a look at our best, check-in .</p>
-    </div>
+    </div> {% endcomment %}
     <div class="row mx-n2">
         {% for i in models %}
         <div class="col-sm-6 col-md-4 px-2 mb-md-0 card-mb-3">
             <a class="card card-frame h-100" href="{% url 'Gallery' i.id %}">
-                <img class="" src="../../media/{{i.thumbnail}}" alt="Image Description">
+                <img class="" src="../../media/{{i.thumbnail}}" alt="Image Description" style="height: 43%;">
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-1">
                         <span class="d-block text-dark font-weight-bold">{{i.name}}</span>
@@ -51,39 +55,7 @@
                 </div>
             </a>
         </div>
-        <div class="col-sm-6 col-md-4 px-2 mb-md-0 card-mb-3">
-            <a class="card card-frame h-100" href="{% url 'Gallery' i.id %}">
-                <img class="" src="../../media/{{i.thumbnail}}" alt="Image Description">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-1">
-                        <span class="d-block text-dark font-weight-bold">{{i.name}}</span>
-                    </div>
-                    <span class="d-block text-body font-size-1">{{i.description}}</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-md-4 px-2 mb-md-0 card-mb-3">
-            <a class="card card-frame h-100" href="{% url 'Gallery' i.id %}">
-                <img class="" src="../../media/{{i.thumbnail}}" alt="Image Description">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-1">
-                        <span class="d-block text-dark font-weight-bold">{{i.name}}</span>
-                    </div>
-                    <span class="d-block text-body font-size-1">{{i.description}}</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-md-4 px-2 mb-md-0 card-mb-3">
-            <a class="card card-frame h-100" href="{% url 'Gallery' i.id %}">
-                <img class="" src="../../media/{{i.thumbnail}}" alt="Image Description">
-                <div class="card-body">
-                    <div class="d-flex align-items-center mb-1">
-                        <span class="d-block text-dark font-weight-bold">{{i.name}}</span>
-                    </div>
-                    <span class="d-block text-body font-size-1">{{i.description}}</span>
-                </div>
-            </a>
-        </div>
+    
         {% endfor %}
 
     </div>

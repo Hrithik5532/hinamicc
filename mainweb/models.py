@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from msilib.schema import Class
 from pydoc import describe
 from pyexpat import model
 from django.db import models
@@ -96,7 +97,7 @@ def get_uplaod_file(name, filename):
 class Scrapbook(models.Model):
     name = models.CharField(max_length=100)
     thumbnail = models.ImageField(upload_to=get_uplaod_file_name)
-    description = models.CharField(max_length=100, default='')
+    description = models.CharField(max_length=1000, default='')
 
     def __str__(self):
         return self.name
@@ -130,3 +131,21 @@ class SubcribeUsers(models.Model):
 
     def __str__(self):
         return self.email 
+
+
+
+class JobsPositions(models.Model):
+    job_title = models.CharField(max_length=100)
+    location = models.CharField(default="Mumbai",max_length=50)
+    description = RichTextField()
+
+
+class Candidates(models.Model):
+    job_title = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone_no = models.PositiveIntegerField(max_length=13)
+    additional_info = models.TextField(null=True,blank=True)
+    resume = models.FileField(upload_to="resume/")
+
+    date = models.DateTimeField(default=now)

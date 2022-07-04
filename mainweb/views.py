@@ -50,15 +50,14 @@ def get_prev_next(id):
 def home(request):
     allblogs = Post.objects.filter(post_now=True).reverse()[:4]
     blogs=[]
-    
+    form = ContactForm
     for p in allblogs :
         if p.post_date <= date.today():
                 blogs.append(p)
 
+    ip_count = IpModel.objects.all().count()
     contact = ContactForm()
     if request.method == "POST":
-        print(request.POST.get('fname'))
-        print(request.POST.get('email'))
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
@@ -67,7 +66,7 @@ def home(request):
             return HttpResponseRedirect(reverse('home'))
         print(form.errors)
         messages.error(request,f'Not Submitted {form.errors}!')
-    return render(request, "html/index.html" ,{'blogs':blogs,'contact':contact})
+    return render(request, "html/index.html" ,{'blogs':blogs,'contact':contact,'form':form,'ip_count':ip_count})
 
 
 def contact(request):
@@ -318,7 +317,25 @@ def prashant(request):
 
 
 def carrier(request):
-  return render(request, "html/carrier.html")
+    jobs=JobsPositions.objects.all()
+    candidateform = CandidateForm()
+    if request.method == "POST":
+        name=request.POST.get("name")
+        position=request.POST.get("job_title")
+
+        form = CandidateForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            x =f'{name} Your Application Submitted Successfully!'
+            messages.success(request,x)
+           
+            return HttpResponseRedirect(reverse('career'))
+        else:
+            x =f'{name} Please Fill Correct Information'
+
+            messages.error(request,x)
+
+    return render(request, "html/carrier.html",{'jobs':jobs,'candidateform':candidateform})
 
 
 

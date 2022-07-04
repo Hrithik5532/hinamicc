@@ -1,4 +1,5 @@
 from dataclasses import field
+import email
 from django import forms
 from .models import *
 
@@ -24,9 +25,9 @@ class ContactForm(forms.ModelForm):
     }
     service =forms.ChoiceField(  required=False ,initial='----',choices=services ,widget=forms.Select(attrs={'class': 'form-control'}))
 
-    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control','placeHolder':"Enter Email"}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'form-control','placeHolder':" Email"}))
     number = forms.IntegerField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Number"}))
-    fname=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Enter First Name"}))
+    fname=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"First Name"}))
     comment=forms.CharField(required=False ,widget=forms.Textarea(attrs={'class':'form-control','placeHolder':"Tell us more about your project, needs, and timeline."}))
     website=forms.CharField(required=False ,widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Business Name Or URL"}))
 
@@ -34,3 +35,14 @@ class ContactForm(forms.ModelForm):
         model= Contact
         exclude=['date']
   
+
+class CandidateForm(forms.ModelForm):
+    job_title=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Position/Job Title"}))
+    name=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Full Name"}))
+    email=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Email"}))
+    phone_no=forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeHolder':"Phone Number"}))
+    additional_info=forms.CharField(widget=forms.Textarea(attrs={'class':'form-control','placeHolder':"Additional Information"}))
+    resume=forms.FileField()
+    class Meta:
+        model= Candidates
+        exclude=['date']

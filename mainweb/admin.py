@@ -39,8 +39,18 @@ class PostAdmin(admin.ModelAdmin):
     list_per_page = 8
     icon_name='add_to_photos'
 
+class JobsPositionsAdmin(admin.ModelAdmin):
+    list_display=("job_title","location")
+    icon_name='mail'
+
+class CandidatesAdmin(admin.ModelAdmin):
+    list_display=("job_title","name","email")
+    icon_name='person'
+
 admin.site.register(Scrapbook)
 admin.site.register(ScrapBookImg,ScrapBookImgAdmin)
+admin.site.register(JobsPositions,JobsPositionsAdmin)
+admin.site.register(Candidates,CandidatesAdmin)
 
 
 admin.site.register(Post,PostAdmin)

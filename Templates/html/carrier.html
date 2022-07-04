@@ -16,21 +16,10 @@
 
 
 <!-- Signup Form Section -->
-<div class="align-items-center" style="background-image: url(/assets/img/Carrier/c2.jpg); width: 100%; height: 70vh; background-size:cover;">
-    <div class="container-xl container-fluid space-3">
-        <div class="row justify-content-lg-between align-items-lg-center rotate-cardn-5">
-            <div class="col-md-5 mb-lg-0">
-                <div class="card h-100 p-4">
-                    <div class="m-1" style="border: 1px solid rgba(190, 190, 190, 0.344); padding: 20px ;">
-                        <h1 class="h1">Work with us</h1>
-                        <p style="color: black;">At himanis' CC, We seek hard-working, self starterst to join our family of collabaration and ambitions industry professionals.</p>
-                        <p style="color: black;">Build Your Carrier and the future with us</p>
-                    </div>
+<div class="js-slide  bg-img-hero space-3 align-items-center" style="height: 80vh;opacity:1; background-image: url(/assets/img/Carrier/careers.jpg);">
 
-                </div>
-            </div>
-        </div>
-    </div>
+{% comment %} <div class="align-items-center" style="background-image: url(/assets/img/Carrier/c2.jpg); width: 100%; height: 70vh; background-size:cover;"> {% endcomment %}
+ 
 </div>
 
 
@@ -41,16 +30,21 @@
     <div class="container space-top-2 space-bottom-3 ">
 
         <div class="w-md-100 w-lg-100 mx-md-auto mb-5 mb-md-9 ">
+            <h1 class="h1">Work with us</h1>
+                        <p style="color: black;">At himanis' CC, We seek hard-working, self starterst to join our family of collabaration and ambitions industry professionals.</p>
+                        <p style="color: black;">Build Your Carrier and the future with us</p>
+
             <h2>Open Positions</h2>
+
             <span class="d-block small font-weight-bold text-cap mb-2 ">Current Job Openings</span>
         </div>
 
 
 
-        <div class="row ">
+         <div class="row ">
             <div class="col-md-3 ">
                 <div class="border-bottom pb-5 mb-9 ">
-                    <form action="{% url 'blogs'%} ">
+                    <form action="{% url 'blogs'%} " method="POST">
                         <div class="filter-search ">
                             <div class="filter-gap-2 filter-search-Cat ">
                                 <select class="bordered-element-light form-control custom-select text-muted" name='categoryName' data-msg="Please select country. ">
@@ -64,21 +58,29 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> 
             <div class="col-md-9 ">
-                <a class="card card-frame mb-3 job-card " href="#modal" data-toggle="modal" data-target="#exampleModal">
+                {% for job in jobs %}
+                <a class="card card-frame mb-3 job-card " href="#modal" data-toggle="modal" data-target="#exampleModal" onclick="myFunction({{ forloop.counter }})" >
                     <div class="row align-items-sm-center ">
-                        <span class="col-sm-6 text-dark ">
-                            Graphic Designer
+                        <span class="col-sm-6 text-dark " id="title{{forloop.counter}}">
+                           {{job.job_title}}
                         </span>
                         <span class="col-6 col-sm-3 text-body ">
-                            Mumbai
+                            {{job.location}}
                         </span>
-                        <span class="col-6 col-sm-3 text-right" data-toggle="modal" data-target="#exampleModal">
+                      
+                        <span class="col-6 col-sm-3 text-right" data-toggle="modal" data-target="#exampleModal" id="apply">
                             Apply <i class="fas fa-angle-right fa-sm ml-1 "></i>
                         </span>
                     </div>
                 </a>
+                <span class="col-6 col-sm-3 text-body " id= "description{{ forloop.counter }}" style="display:none;">
+                    {{job.description | safe}}   
+                </span>
+                {% endfor %}
+
+                
 
             </div>
         </div>
@@ -86,14 +88,19 @@
 
 </div>
 
-
+<script>
+    function myFunction(x) {
+    document.getElementById('position').innerText = document.getElementById('title'+x).innerText;;
+    document.getElementById('jobdetails').innerHTML = document.getElementById('description'+x).innerHTML;;
+    }
+</script>
 
 
 <div class="modal fade bordered-element-light align-item-center" id="exampleModal" tabindex="-5" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document ">
+    <div class="modal-dialog " role="document " style="height:150% !important;">
         <div class="modal-content ">
             <div class="modal-header ">
-                <h5 class="modal-title " id="exampleModalLabel">Let's Connect
+                <h5 class="modal-title " id="exampleModalLabel">Position Details
                 </h5>
                 <button type="button " class="btn btn-xs btn-icon btn-soft-secondary bordered-element-light " data-dismiss="modal" aria-label="Close">
                     <svg aria-hidden="true " width="10 " height="10 " viewBox="0 0 18 18 "
@@ -108,58 +115,68 @@
                 <div>
                     <div>
                         <div class="media d-block d-sm-flex ">
-                            <div class="media-body media-body-team ">
-                                <form class="js-validates " action="{% url 'home' %} " method="POST ">
-                                    {% csrf_token %}
-                                    <div class="card-body p-4 p-md-7 ">
-                                        <div class="mb-4 ">
-                                            <h3>Fill out the form and we'll be in touch as soon as possible.</h3>
-                                        </div>
+                            <div class="media-body media-body-team " style="border:1px solid;">
+                                
 
+                                <div class="card-body p-4 ">
+                                    <div class="mb-4 ">
+                                        <h3 id="position"></h3>
+                                    </div>
+                                    <div class="" id="jobdetails">
+                                    </div>
+                                    
+                                </div>
+                                <div class="card-body p-4 p-md-7 ">
+                                    <div class="mb-4 ">
+                                        <h3>Fill out the form and we'll be in touch as soon as possible.</h3>
+                                    </div>
+                                    
+                                    <form href="{% url 'career'%}" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token%} 
                                         <div class="row mx-n2 ">
                                             <div class="col-sm-6 px-2 ">
                                                 <div class="js-form-message form-group ">
-                                                    {{contact.fname}}
+                                                    {{candidateform.job_title}}
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-6 px-2 ">
                                                 <div class="js-form-message form-group ">
-                                                    {{contact.email}}
+                                                    {{candidateform.name}}
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-6 px-2 ">
                                                 <div class="js-form-message form-group ">
-                                                    {{contact.number}}
+                                                    {{candidateform.email}}
                                                 </div>
                                             </div>
 
                                             <div class="col-sm-6 px-2 ">
                                                 <div class="js-form-message form-group ">
-                                                    {{contact.service}}
+                                                    {{candidateform.phone_no}}
                                                 </div>
                                             </div>
-
-                                            <div class="col-sm-6 px-2 ">
-                                                <div class="js-form-message form-group ">
-                                                    {{contact.website}}
-                                                </div>
-                                            </div>
-
 
 
                                             <div class="col-sm-12 px-2 ">
                                                 <div class="js-form-message form-group ">
-                                                    {{contact.comment}}
+                                                    <div class="js-form-message form-group ">
+                                                        {{candidateform.additional_info}}
+                                                    </div>
+                                                    <label >Resume: </label>
+                                                     {{candidateform.resume}} 
+                                                    {% comment %} <input type="file" name="resume"> {% endcomment %}
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <button type="submit " class="btn btn-block btn-primary ">Get Quote</button>
+                                        <button type="submit " class="btn btn-block btn-primary ">Submit</button>
+                                    </form>
                                     </div>
-                                </form>
                             </div>
+
+                            
                         </div>
                     </div>
                 </div>
